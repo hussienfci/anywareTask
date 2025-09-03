@@ -20,7 +20,7 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('NestJs Test API')
+    .setTitle('Coligo API')
     .setDescription('API documentation for the NestJs')
     .setVersion('1.0')
     .addBearerAuth()
