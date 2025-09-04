@@ -10,9 +10,9 @@ export class QuizService {
   constructor(@InjectModel(Quiz.name)
               private QuizModel: Model<Quiz>){}
 // The function of the (POST) method
- async createQuiz(createAnnouncementDto: CreateQuizDto) {
-    const createAnnounce = new this.QuizModel(createAnnouncementDto) ; 
-    return createAnnounce.save() ;   
+ async createQuiz(createQuizDto: CreateQuizDto) {
+    const createQuiz = new this.QuizModel(createQuizDto) ; 
+    return createQuiz.save() ;   
   }
   // The function of (GET) method to get all Quiz
   async findAllQuiz():Promise<Quiz[]> {
@@ -20,28 +20,28 @@ export class QuizService {
   }
 
   // Function of (GET) method that get specific 
-  // announcement by id
+  // Quiz by id
   async findOneQuiz(id: string): Promise<Quiz | string> {
-    const announce =  await this.QuizModel.findOne({_id: id}) ; 
-    if(!announce){
+    const quiz =  await this.QuizModel.findOne({_id: id}) ; 
+    if(!quiz){
       return `announcement with id: ${id} not found..!`;
     } else{
-      return announce;
+      return quiz;
     } 
   }
 
   // Function of (PATCH) that update the schema using
-  // id of the announcement
-  async updateQuiz(id: string, updateAnnouncementDto: UpdateQuizDto):Promise<Quiz | string | null > {
-    const announce =  await this.QuizModel.findOne({_id: id}) ; 
-      if(!announce){
-      return `announcement with id: ${id} not found..!`;
+  // id of the Quiz
+  async updateQuiz(id: string, updateQuizdto: UpdateQuizDto):Promise<Quiz | string | null > {
+    const quiz = await this.QuizModel.findByIdAndUpdate({_id: id }, updateQuizdto, {new : true} );      
+    if(!quiz){
+      return `quiz with id: ${id} not found..!`;
     } else{
-      return await this.QuizModel.findByIdAndUpdate({_id: id }, announce, {new : true} );      
+      return quiz;      
     } 
   }
   // function of (DELETE) that delete the schema 
-  // using id of the announcement
+  // using id of the Quiz
   async removeQuizByID(id: string) {
     return await this.QuizModel.findByIdAndDelete(id) ; 
   }

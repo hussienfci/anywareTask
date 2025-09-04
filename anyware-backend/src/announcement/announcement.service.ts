@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAnnouncementDto } from './dto/create-announcement.dto';
 import { UpdateAnnouncementDto } from './dto/update-announcement.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -33,11 +33,12 @@ export class AnnouncementService {
   // Function of (PATCH) that update the schema using
   // id of the announcement
   async updateAnnounce(id: string, updateAnnouncementDto: UpdateAnnouncementDto):Promise<Announcement | string | null > {
-    const announce =  await this.announceModel.findOne({_id: id}) ; 
-      if(!announce){
-      return `announcement with id: ${id} not found..!`;
-    } else{
-      return await this.announceModel.findByIdAndUpdate({_id: id }, announce, {new : true} );      
+    const updatedAnnounce = await this.announceModel.findByIdAndUpdate({_id: id }, updateAnnouncementDto , { returnOriginal:false } ).exec(); 
+    if (!updatedAnnounce) {
+      throw new NotFoundException(`announcement with id:  "${id}" not found.`);
+    }
+    else{
+      return updatedAnnounce ; 
     } 
   }
   // function of (DELETE) that delete the schema 

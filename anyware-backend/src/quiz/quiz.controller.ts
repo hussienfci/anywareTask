@@ -7,27 +7,27 @@ import { UpdateQuizDto } from './dto/update-quiz.dto';
 export class QuizController {
   constructor(private readonly quizService: QuizService) {}
 
-  @Post()
+  @Post('/NewQuiz')
   async create(@Body() createQuizDto: CreateQuizDto) {
     return this.quizService.createQuiz(createQuizDto);
   }
 
-  @Get()
+  @Get('quizzes')
   async findAll() {
     return this.quizService.findAllQuiz();
   }
 
-  @Get(':id')
+  @Get('/quiz/:id')
   async findOne(@Param('id') id: string) {
     return this.quizService.findOneQuiz(id);
   }
 
-  @Patch(':id')
+  @Patch('/updateQuiz/:id')
   async update(@Param('id') id: string, @Body() updateQuizDto: UpdateQuizDto) {
     return this.quizService.updateQuiz(id, updateQuizDto);
   }
 
-  @Delete(':id')
+  @Delete('/deleteQuiz/:id')
   async remove(@Param('id') id: string) {
     return this.quizService.removeQuizByID(id);
   }

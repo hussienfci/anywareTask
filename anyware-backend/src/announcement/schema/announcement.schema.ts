@@ -9,7 +9,7 @@ export class Announcement {
 
     @Prop({required:true})
 
-    auother: string ; 
+    author: string ; 
 
     @Prop()
     message: string ; 

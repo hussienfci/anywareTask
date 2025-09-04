@@ -7,27 +7,27 @@ import { UpdateAnnouncementDto } from './dto/update-announcement.dto';
 export class AnnouncementController {
   constructor(private readonly announcementService: AnnouncementService) {}
 
-  @Post()
+  @Post('/addNewAnnounment')
   async createAnnounce(@Body() createAnnouncementDto: CreateAnnouncementDto) {
     return this.announcementService.createAnnouncement(createAnnouncementDto);
   }
 
-  @Get()
+  @Get('/Announcements')
   async findAllAnnounce() {
     return this.announcementService.findAllAnnouncement();
   }
 
-  @Get(':id')
+  @Get('/Announcement/:id')
   async findOneById(@Param('id') id: string) {
     return this.announcementService.findOneAnnounce(id);
   }
 
-  @Patch(':id')
+  @Patch('/updateAnnouncement/:id')
   async update(@Param('id') id: string, @Body() updateAnnouncementDto: UpdateAnnouncementDto) {
     return this.announcementService.updateAnnounce(id, updateAnnouncementDto);
   }
 
-  @Delete(':id')
+  @Delete('/deleteAnnouncement/:id')
   async remove(@Param('id') id: string) {
     return this.announcementService.removeAnnounceByID(id);
   }

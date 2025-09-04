@@ -4,10 +4,15 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { QuizModule } from './quiz/quiz.module';
 import { AnnouncementModule } from './announcement/announcement.module';
-
+import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
-    MongooseModule.forRoot(process.env.DB_URL as string ),
+    
+    ConfigModule.forRoot({isGlobal:true} ) , 
+    MongooseModule.forRoot(
+    // 'mongodb+srv://hussienmabozaid_db_user:ReNQ4Ufd.XQ2!zA@coligo.bqht1zb.mongodb.net/?retryWrites=true&w=majority&appName=coligo'
+      process.env.MONGO_URI as string 
+    ),
     QuizModule, 
     AnnouncementModule
   ],
