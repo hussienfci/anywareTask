@@ -23,7 +23,7 @@ export const getAnnouncements = async () => {
 // Quizzes Service
 export const getQuizzes = async () => {
   try {
-    const res = await fetch(`${BASE_URL}/quiz/quizzes/QuizController_findAll`, {
+    const res = await fetch(`${BASE_URL}/quiz/quizzes`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
